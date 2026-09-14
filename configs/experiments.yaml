@@ -1,0 +1,33 @@
+# The four experimental conditions (Section 7 of the plan).
+# All conditions share: same DenseNet-121 architecture, optimizer,
+# preprocessing, seeds, and frozen real-only test set. The ONLY thing
+# that changes between conditions is the training-set composition.
+conditions:
+  C0:
+    description: "Original imbalanced real training set (baseline)."
+    uses_vae: false
+    uses_oversampling: false
+
+  C1:
+    description: "Real images + classical inverse-frequency oversampling, no VAE."
+    uses_vae: false
+    uses_oversampling: true
+
+  C2:
+    description: "Real images + VAE synthetic images; each minority class raised to >=50% of majority training count."
+    uses_vae: true
+    balancing_target: "max(0.5 * majority_count, original_count)"
+
+  C3:
+    description: "Real images + VAE synthetic images; each class raised to the majority training count (fully equalized)."
+    uses_vae: true
+    balancing_target: "majority_count"
+
+# Recommended execution order if time/compute is limited (Section 7):
+# 1. C0 (must run first -- establishes the baseline)
+# 2. C3 (primary comparison requested by the project: C0 vs C3)
+# 3. C1 (stronger control: isolates "any balancing" from "VAE balancing")
+# 4. C2 (sensitivity check on synthetic volume)
+run_order: [C0, C3, C1, C2]
+
+seeds: [17, 29, 41]

@@ -1,0 +1,26 @@
+# DenseNet-121 baseline (condition C0) hyperparameters.
+# These mirror src/config.py defaults -- kept here as a human-readable,
+# versionable record of the exact settings used for a given run/report.
+classifier:
+  architecture: densenet121
+  pretrained: true
+  input_size: 224
+  dropout: 0.30
+  label_smoothing: 0.05
+  optimizer: AdamW
+  head_lr: 3e-4
+  backbone_lr: 3e-5
+  weight_decay: 1e-4
+  batch_size: 32
+  stage_a_epochs: 3      # frozen backbone, head only
+  stage_b_max_epochs: 30 # unfrozen final block, cosine decay + early stopping
+  early_stop_patience: 6
+  warmup_epochs: 3
+
+data:
+  train_frac: 0.70
+  val_frac: 0.15
+  test_frac: 0.15
+  group_col: lesion_id   # use patient_id instead if reliably available
+
+seeds: [17, 29, 41]

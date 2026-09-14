@@ -1,0 +1,39 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# --- Data & generated artifacts (large, regenerable, not for version control) ---
+data/raw/*
+data/processed/*
+data/manifests/*
+data/synthetic/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/manifests/.gitkeep
+!data/synthetic/.gitkeep
+
+outputs/checkpoints/*
+outputs/logs/*
+outputs/figures/*
+outputs/predictions/*
+!outputs/checkpoints/.gitkeep
+!outputs/logs/.gitkeep
+!outputs/figures/.gitkeep
+!outputs/predictions/.gitkeep
+
+# Model weights (large binaries -- use Git LFS or external storage if you need to version these)
+*.pt
+*.pth
+*.ckpt
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- OS / editor cruft ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

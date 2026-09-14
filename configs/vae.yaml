@@ -1,0 +1,20 @@
+# Class-specific convolutional VAE hyperparameters (Section 6 of the plan).
+vae:
+  input_size: 128
+  latent_dim: 128
+  encoder_channels: [32, 64, 128, 256]
+  decoder_channels: [256, 128, 64, 32, 3]
+  optimizer: Adam
+  learning_rate: 2e-4
+  batch_size: 32
+  max_epochs: 150
+  early_stop_patience: 15
+  loss: "L1 reconstruction + beta * KL"
+  beta_start: 1e-4
+  beta_end: 1.0
+  beta_warmup_epochs: 20
+
+# Classes trained (everything except the majority class 'nv').
+# akiec/vasc/df have very few real images -- expect higher overfitting risk
+# and lower-quality generations for these; monitor sample panels closely.
+minority_classes: [mel, bkl, bcc, akiec, vasc, df]
